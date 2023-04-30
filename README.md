@@ -45,8 +45,44 @@ The following are the third-party modules utilized by the REAL Team:
 - [Yolo v5](https://github.com/ultralytics/yolov5)
 
 ## System Componets
+The following diagram presents an overview of our software framework:
+<p align="center">
+  <img height="600" src="https://github.com/harryting-yiting/Robothon2023_REAL/blob/main/Assets/System_Overview.png">
+</p>
 
 ### Visual System
+The visual system processes RGB images from the RealSense camera to localize the task board and identify triangular setpoints on the screen. It comprises two subsystems: the Board Localization System and the Screen Detection System.
+
+#### Board Localization System
+The Board Localization System performs in the following steps:
+
+* Identifies the blue button using HSV color space-based color recognition
+* Estimates the location of the red button through neighborhood object search
+* Determines the task board rotation angle using the Hough Transform
+* Refines the board location with physical feedback
+* Locates different task positions using the task board model
+
+The diagram below illustrates the board localization process:
+<p align="center">
+  <img height="600" src="https://github.com/harryting-yiting/Robothon2023_REAL/blob/main/Assets/Board_Localization_System.png">
+</p>
+
+#### Screen Detection System
+The Screen Detection System detects triangular shapes and screen positions for use in the slider move task. We employ a YOLOv5x model as the backbone, fine-tuning it with our self-collected dataset.
+
+The diagram below displays the outputs of the detection system:
+<p align="center">
+  <img height="600" src="https://github.com/harryting-yiting/Robothon2023_REAL/blob/main/Assets/Screen_Detection.png">
+</p>
+
+### Control System
+We utilize the Real-Time Data Exchange (urde) library to control the UR Robot through the Control Interface. To accommodate the complexity and diversity of tasks, we have designed three control methods based on the properties of each specific task. The three control methods are:
+
+* Force and Compliance Control for Insersion
+
+* Follow Fixed Trajectries
+
+* Warp Cable
 
 
 ## Build Workspaces
