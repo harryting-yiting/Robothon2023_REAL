@@ -91,7 +91,7 @@ We utilize the Real-Time Data Exchange (urde) library to control the UR Robot th
   <img width=100% src="Assets/Follow_Fixed_Trajectries.png">
 </p>
 
-* Warp Cable
+* Wrap Cable
 <p align="center">
   <img width=100% src="Assets/Warp_Cable.png">
 </p>
