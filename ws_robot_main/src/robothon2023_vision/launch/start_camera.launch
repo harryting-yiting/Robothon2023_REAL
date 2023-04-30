@@ -1,0 +1,11 @@
+<launch>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="enable_sync" value="true" />
+    <arg name="align_depth" value="true" />
+    <arg name="publish_tf"  value="false" />
+
+  </include>
+
+
+</launch>

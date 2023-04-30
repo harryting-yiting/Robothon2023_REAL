@@ -1,0 +1,9 @@
+<launch>
+
+  <include file="$(find ur_robot_driver)/launch/ur3_bringup.launch">
+    <arg name="robot_ip" value="10.10.10.1"/>
+    <arg name="kinematics_config" value="$(find board_localization)/config/calibration.yaml" />
+  </include>
+
+
+</launch>

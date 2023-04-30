@@ -1,0 +1,11 @@
+# Define the goal
+uint32 force # 20 -100
+uint32 speed # 1 - 100
+uint32 position # 0 - 10000
+
+---
+# Define the result
+bool grasped
+---
+# Define a feedback message 
+bool moving

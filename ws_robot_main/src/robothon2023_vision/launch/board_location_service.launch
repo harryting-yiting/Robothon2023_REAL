@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<launch>
+  <node  name="board_identification" type="BoardLocalization2023.py" pkg="robothon2023_vision" output="screen"/>
+</launch>
