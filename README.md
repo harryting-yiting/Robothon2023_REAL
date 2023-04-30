@@ -16,8 +16,8 @@ The robot platform utilized by our team in the Robothon Grand Challenge is illus
 The hardware system is composed of four primary components:
 
 * **UR 5e Collaborative Robot**: A six-degree-of-freedom collaborative robot mounted on a fixed table, designed to ensure precise and efficient movement.
-* **RealSense D435 RGBD Camera**: Mounted on the last joint of the robot, this camera supplies crucial RGB information to our system, enabling accurate object recognition and localization.
-* **Two-Finger Gripper**: A gripper that is mounted on the final joint of the robot and provides versatile manipulation capabilities.
+* **RealSense D455 RGBD Camera**: Mounted on the last joint of the robot, this camera supplies crucial RGB information to our system, enabling accurate object recognition and localization.
+* **Parallel Gripper**: A gripper that is mounted on the final joint of the robot and provides versatile manipulation capabilities.
 * **Self-designed End Effector**: A end effector that is design for special purpose of the task. It is mounted on the two-finger gripper.
 
 
@@ -27,9 +27,8 @@ We have divided the software into five separate sub workspaces, each containing 
 
 * **ws_realsense_driver**: Realsense driver
 * **ws_ur_driver**: UR 5 driver
-* **ws_handeye_callibration**: Hand-eye calibration
-* **ws_robot_main**: Robot main (contains detection and planning)
-* **ws_vision**: Vision-related codes
+* **ws_robot_main**: Vision and control related
+* **ws_vision**: YOLOv5 
 
 
 ## System Requirements
@@ -42,10 +41,8 @@ We have divided the software into five separate sub workspaces, each containing 
 ## Software Dependency
 The following are the third-party modules utilized by the REAL Team:
 - [ROS](https://www.ros.org/)
-- [Universal robot ros driver](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver)
 - [Intel realsense ros driver](https://github.com/IntelRealSense/realsense-ros)
 - [UR RTDE Control](https://sdurobotics.gitlab.io/ur_rtde/)
-- [Hand-eye Calibration](https://github.com/JStech/moveit_calibration)
 - [Yolo v5](https://github.com/ultralytics/yolov5)
 
 
@@ -109,12 +106,8 @@ source ~/.bashrc
 > The above code is adopted from
 > https://github.com/UniversalRobots/Universal_Robots_ROS_Driver
 
-### 3. Build ws_handeye_callibration
-
-**NOTE:** The code which is alrealy in the folder `ws_handeye_callibration/src`
-
-### 4. Build ws_robot_main
-#### 4.1 Install RS485 Gripper Dependency
+### 3. Build ws_robot_main
+#### 3.1 Install RS485 Gripper Dependency
 
 ```bash
 sudo apt install python3-pip
@@ -123,7 +116,7 @@ sudo usermod -aG dialout $USER
 #reboot
 ```
 
-#### 4.2 Install ur_rtde package
+#### 3.2 Install ur_rtde package
 ```bash
 sudo add-apt-repository ppa:sdurobotics/ur-rtde
 sudo apt-get update
@@ -133,20 +126,29 @@ pip install --user ur_rtde
 > The code above is adopted from
 > https://sdurobotics.gitlab.io/ur_rtde/installation/installation.html
 
-#### 4.3 Build Workspace
+#### 3.3 Build Workspace
 ```bash
-catkin_make
+catkin bulid
 ```
-### 5. Build ws_vision
+### 4. Build ws_vision
+Fisrt download our trained model from
+> https://drive.google.com/drive/folders/11PZrns0N1Gya7y67oJtZVVB2nY58xLxI?usp=sharing
+The put the model in the folder
 ```bash
+<your project directory>/ws_vision/ws_vision/src/yolov5_ros/src/yolov5/models/
+```
+
+```bash
+<your project directory>/ws_vision/ws_vision/src/yolov5_ros/src/yolov5/models
 cd <your project directory>/ws_vision
-catkin_make
+catkin build
 ```
+
+
 
 ## Set up Paths
 ```bash
 cd <your project directory>
-echo "source <your project directory>/ws_handeye_callibration/devel/setup.bash" >> ~/.bashrc
 echo "source <your project directory>/ws_realsense_driver/devel/setup.bash" >> ~/.bashrc
 echo "source <your project directory>/ws_ur_driver/devel/setup.bash" >> ~.bashrc
 echo "source <your project directory>/ws_robot_main/devel/setup.bash" >> ~.bashrc
@@ -156,60 +158,27 @@ echo "source <your project directory>/ws_vision/devel/setup.bash" >> ~.bashrc
 ## Launch 
 
 **NOTE** Please run each launch in a seperate terminal
-<!-- 1. Launch UR Controller and Driver
-
-```bash
-cd ~/Desktop/Projects/Robothon_ROS1/ws_ur_driver/src/hkustgz_ur_launch/launch
-roslaunch highbay_ur5e.launch 
-``` -->
 1. Launch ur_rtde controller
 ```bash
 rosrun robot_main ur_rtde_test.py
 ```
 After this step, you can connect the robot control panel to ROS.
 
-<!-- 2. Launch Moveit Planner and RVIZ
-```bash
-roslaunch ur5e_moveit_config moveit_planning_execution.launch
-```
-```bash
-roslaunch ur5e_moveit_config moveit_rviz.launch rviz_config:=$(rospack find ur5e_moveit_config)/launch/moveit.rviz
-``` -->
-2. Launch DH Gripper
-```bash
-rosrun robot_main dhGripperActionServer.py
-rosrun actionlib_tools axclient.py /dhgripper_action
-```
 
-3. Launch the Camera Driver
-For Realsense-ROS based algorithm:
+2. Launch the Camera Driver
 ```bash
-cd ~
 roslaunch realsense2_camera rs_camera.launch
 ```
 
-For button detection based CV algorithm:
-```bash
-roslaunch robothon2023_vision board_loc.launch
-```
-
-For screen detection based Improved-YOLOv5 algorithm:
+3. Launch Screen and Triangle Detection
 ```bash
 roslaunch yolov5_ros yolov5.launch
-cd ~/Robothon_REAL/ws_vision/src/yolov5_ros/src
-python bbox_subscriber.py
+rosrun robothon2023_vison bbox_subscriber.py
 ```
 
-4. Launch Our Magic Code
+4. Run Task Board Localization
 ```bash
-cd ~/Desktop/Projects/Robothon_ROS1/ws_robot_main
-source devel/setup.bash
-rosrun robot_main main.py
-```
-
-5. Start Planning
-```bash
-rostopic pub /StartPlanning std_msgs/Bool True
+rosrun robothon2023_vison localize.py
 ```
 
 # Authors

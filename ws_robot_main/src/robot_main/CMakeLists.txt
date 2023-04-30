@@ -169,11 +169,8 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-  scripts/mover_ur_mygripper.py
-  scripts/main.py
   scripts/dhGripperActionServer.py
   scripts/ur_rtde_test.py
-  scripts/testGripper.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
