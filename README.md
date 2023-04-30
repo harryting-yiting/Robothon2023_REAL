@@ -21,7 +21,6 @@ The hardware system is composed of four primary components:
 * **Self-designed End Effector**: A end effector that is design for special purpose of the task. It is mounted on the two-finger gripper.
 
 
-
 # Software modules
 We have divided the software into five separate sub workspaces, each containing a driver or a module. The primary code developed for the competition is stored in the robot main workspace to minimize re-compilation and reduce dependency between various drivers.
 
@@ -44,6 +43,10 @@ The following are the third-party modules utilized by the REAL Team:
 - [Intel realsense ros driver](https://github.com/IntelRealSense/realsense-ros)
 - [UR RTDE Control](https://sdurobotics.gitlab.io/ur_rtde/)
 - [Yolo v5](https://github.com/ultralytics/yolov5)
+
+## System Componets
+
+### Visual System
 
 
 ## Build Workspaces
