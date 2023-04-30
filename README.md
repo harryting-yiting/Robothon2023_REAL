@@ -1,7 +1,7 @@
 # Robothon 2023 Grand-Challenge REAL Team Report
 
 <p align="center">
-Authors: Yiting HE, Yuyang ZHANG, Linyi HUANG, Ronghe QIU
+<strong>Authors: Yiting HE, Yuyang ZHANG, Linyi HUANG, Ronghe QIU</strong>
 </p>
 
 This repository contains the source code of the REAL Team's participation in the Robothon 2023 Grand Challenge competition.
@@ -10,14 +10,16 @@ This repository contains the source code of the REAL Team's participation in the
 # Hardware Setup
 The robot platform utilized by our team in the Robothon Grand Challenge is illustrated in the figure below.
 <p align="center">
-  **Image to be upddated**
+  <img height="600" src="https://github.com/harryting-yiting/Robothon_REAL/blob/main/Assets/Hardware_Overview.jpeg">
 </p>
 
-The hardware system is composed of three primary components:
+The hardware system is composed of four primary components:
 
-* **UR5e Collaborative Robot**: A six-degree-of-freedom collaborative robot mounted on a fixed table, designed to ensure precise and efficient movement.
-* **Two-Finger Gripper**: Equipped with a custom-designed end-effector, this gripper is mounted on the final joint of the robot and provides versatile manipulation capabilities.
+* **UR 5e Collaborative Robot**: A six-degree-of-freedom collaborative robot mounted on a fixed table, designed to ensure precise and efficient movement.
 * **RealSense D435 RGBD Camera**: Mounted on the last joint of the robot, this camera supplies crucial RGB information to our system, enabling accurate object recognition and localization.
+* **Two-Finger Gripper**: A gripper that is mounted on the final joint of the robot and provides versatile manipulation capabilities.
+* **Self-designed End Effector**: A end effector that is design for special purpose of the task. It is mounted on the two-finger gripper.
+
 
 
 # Software modules
@@ -194,6 +196,8 @@ roslaunch robothon2023_vision board_loc.launch
 For screen detection based Improved-YOLOv5 algorithm:
 ```bash
 roslaunch yolov5_ros yolov5.launch
+cd ~/Robothon_REAL/ws_vision/src/yolov5_ros/src
+python bbox_subscriber.py
 ```
 
 4. Launch Our Magic Code
@@ -207,7 +211,6 @@ rosrun robot_main main.py
 ```bash
 rostopic pub /StartPlanning std_msgs/Bool True
 ```
-
 
 # Authors
 
