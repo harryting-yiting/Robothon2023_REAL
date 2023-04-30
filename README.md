@@ -46,8 +46,10 @@ The following are the third-party modules utilized by the REAL Team:
 
 ## System Componets
 The following diagram presents an overview of our software framework:
+
+
 <p align="center">
-  <img height="600" src="https://github.com/harryting-yiting/Robothon2023_REAL/blob/main/Assets/System_Overview.png">
+  <img width=100% src="Assets/System_Overview.png">
 </p>
 
 ### Visual System
@@ -63,8 +65,9 @@ The Board Localization System performs in the following steps:
 * Locates different task positions using the task board model
 
 The diagram below illustrates the board localization process:
+
 <p align="center">
-  <img height="600" src="https://github.com/harryting-yiting/Robothon2023_REAL/blob/main/Assets/Board_Localization_System.png">
+  <img width=100% src="Assets/Board_Localization_System.png">
 </p>
 
 #### Screen Detection System
@@ -72,18 +75,26 @@ The Screen Detection System detects triangular shapes and screen positions for u
 
 The diagram below displays the outputs of the detection system:
 <p align="center">
-  <img height="600" src="https://github.com/harryting-yiting/Robothon2023_REAL/blob/main/Assets/Screen_Detection.png">
+  <img width=80% src="Assets/Screen_Detection.png">
 </p>
 
 ### Control System
 We utilize the Real-Time Data Exchange (urde) library to control the UR Robot through the Control Interface. To accommodate the complexity and diversity of tasks, we have designed three control methods based on the properties of each specific task. The three control methods are:
 
 * Force and Compliance Control for Insersion
+<p align="center">
+  <img width=100% src="Assets/Force_and_Compliance_Control_for_Insersion.png">
+</p>
 
 * Follow Fixed Trajectries
+<p align="center">
+  <img width=100% src="Assets/Follow_Fixed_Trajectries.png">
+</p>
 
 * Warp Cable
-
+<p align="center">
+  <img width=100% src="Assets/Warp_Cable.png">
+</p>
 
 ## Build Workspaces
 
