@@ -171,6 +171,8 @@ include_directories(
 catkin_install_python(PROGRAMS
   scripts/dhGripperActionServer.py
   scripts/ur_rtde_test.py
+  scripts/ur_rtde_test_slow_custom.py
+  scripts/ur_rtde_test_slow.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
