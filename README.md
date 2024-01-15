@@ -10,7 +10,7 @@ This repository contains the source code of the REAL Team's participation in the
 # Hardware Setup
 The robot platform utilized by our team in the Robothon Grand Challenge is illustrated in the figure below.
 <p align="center">
-  <img height="600" src="https://github.com/harryting-yiting/Robothon_REAL/blob/main/Assets/Hardware_Overview.jpeg">
+  <img height="600" src="Assets/Hardware_Overview.jpeg">
 </p>
 
 The hardware system is composed of four primary components:
